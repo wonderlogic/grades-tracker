@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import CourseForm from './components/CourseForm';
+import CourseTable from './components/CourseTable';
 
 function App() {
+  const [courses, setCourses] = useState([]);
+
+  const addCourse = (course) => {
+    setCourses((prevCourses) => [...prevCourses, course]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container mx-auto p-4 grid grid-cols-4 gap-4">
+      <div className="col-span-1 bg-white rounded shadow-lg p-4 m-4">
+        <CourseForm addCourse={addCourse}></CourseForm>
+      </div>
+      <div className="col-span-3 bg-white rounded shadow-lg p-4 m-4">
+        <CourseTable courses={courses}></CourseTable>
+      </div>
     </div>
   );
 }
